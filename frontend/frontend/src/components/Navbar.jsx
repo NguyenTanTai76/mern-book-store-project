@@ -11,10 +11,22 @@ import avatarImg from '../assets/avatar.png';
 import { useState } from 'react';
 
 const navigation = [
-  { name: 'Dashboard', href: '/user-dashboard' },
-  { name: 'Orders', href: '/orders' },
-  { name: 'Cart Page', href: '/cart' },
-  { name: 'Check Out', href: '/checkout' },
+  {
+    name: 'Dashboard',
+    href: '/dashboard',
+  },
+  {
+    name: 'Orders',
+    href: '/order',
+  },
+  {
+    name: 'Cart Page',
+    href: '/cart',
+  },
+  {
+    name: 'Check Out',
+    href: '/checkout',
+  },
 ];
 
 const Navbar = () => {
@@ -73,6 +85,14 @@ const Navbar = () => {
                           </Link>
                         </li>
                       ))}
+                      <li>
+                        <button
+                          onClick={handleLogOut}
+                          className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
+                        >
+                          Logout
+                        </button>
+                      </li>
                     </ul>
                   </div>
                 )}
@@ -83,7 +103,7 @@ const Navbar = () => {
               </Link>
             )}
           </div>
-
+          <HiOutlineUser className="size-6" />
           <button className="hidden sm:block">
             <HiOutlineHeart className="size-6" />
           </button>
