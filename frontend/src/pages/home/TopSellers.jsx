@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import BookCard from '../books/BookCard';
 
 // Import Swiper React components
@@ -11,6 +11,7 @@ import { Pagination, Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import { useFetchAllBooksQuery } from '../../redux/features/books/booksApi';
 
 const categories = [
   'Choose a genre',
@@ -21,20 +22,18 @@ const categories = [
 ];
 
 const TopSellers = () => {
-  const [books, setBooks] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('Choose a genre');
 
-  useEffect(() => {
-    fetch('books.json')
-      .then((res) => res.json())
-      .then((data) => setBooks(data));
-  }, []);
+  // Gọi API để lấy tất cả sách
+  const { data: books = [] } = useFetchAllBooksQuery();
 
+  // Lọc sách dựa trên thể loại được chọn
   const filteredBooks =
     selectedCategory === 'Choose a genre'
       ? books
       : books.filter(
-          (book) => book.category === selectedCategory.toLowerCase()
+          (book) =>
+            book.category.toLowerCase() === selectedCategory.toLowerCase()
         );
 
   return (
